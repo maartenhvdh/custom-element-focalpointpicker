@@ -50,8 +50,8 @@
         $(document).ready(function () {
             function processData(response) {
                 console.log(response)
-                    const imageURL = response.data.item.elements.image.value[0].imageUrl;
-                    document.body.style.backgroundImage = "url("+imageURL+")";
+                    const imageURL = response.data.item.elements.image.value[0].url;
+                    document.getElementById("background-container").style.backgroundImage = "url("+imageURL+")";
                     
                 const height = Math.ceil($("result").height());
                 CustomElement.setHeight(height);
