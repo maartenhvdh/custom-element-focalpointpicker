@@ -53,7 +53,7 @@
                     const imageURL = response.data.item.elements.image.value[0].url;
                     document.getElementById("background-container").style.backgroundImage = "url("+imageURL+")";
                     
-                const height = Math.ceil($("result").height());
+                const height = Math.ceil($(".ui.container").height());
                 CustomElement.setHeight(height);
                 }
 
