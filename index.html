@@ -51,7 +51,7 @@
             function processData(response) {
                 console.log(response)
                     const imageURL = response.data.item.elements.image.value[0].url;
-                    document.getElementById("background-container").style.backgroundImage = "url("+imageURL+")";
+                    document.getElementById("background-container").style.backgroundImage = "url("+imageURL+"?auto=format&fit=crop&w=1000&q=80)";
                     
                 const height = Math.ceil($(".ui.container").height());
                 CustomElement.setHeight(1000);
