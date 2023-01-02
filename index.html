@@ -54,8 +54,8 @@
         $(document).ready(function () {
             function processData(response) {
                 const imageURL = response.data.item.elements.image.value[0].url;
-                document.getElementById("background-container").style.backgroundImage = "url(" + imageURL + "?w=700&q=80)";
-                document.getElementById("focal-img").src = imageURL + "?auto=format&fit=crop&w=700&q=80";
+                document.getElementById("background-container").style.backgroundImage = "url(" + imageURL + "?h=1000&q=80)";
+                document.getElementById("focal-img").src = imageURL + "?auto=format&fit=crop&h=1000&q=80";
                 const height = Math.ceil($(".ui.container").height());
                 CustomElement.setHeight(1000);
             }
@@ -84,12 +84,14 @@
                         processData(response)
                     });
 
-                CustomElement.observeElementChanges([elementName], (changedElementCodenames) => {
-                    CustomElement.getElementValue(elementName, (value) => {
-                        console.log(value)
-                        const imageURL = value[0].url;
-                        document.getElementById("background-container").style.backgroundImage = "url(" + imageURL + "?auto=format&fit=crop&w=700&q=80)";
-                        document.getElementById("focal-img").src = imageURL + "?auto=format&fit=crop&w=700&q=80";
+                CustomElement.observeItemChanges((callback) => {
+                    deliveryClient
+                    .item(_context.item.codename)
+                    .languageParameter(_context.variant.codename)
+                    .elementsParameter([elementName])
+                    .toPromise()
+                    .then(response => {
+                        processData(response)
                     });
                 });
             });
