@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
-
+    <script src="https://kit.fontawesome.com/71e157ebdf.js" crossorigin="anonymous"></script>
     <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
     <style></style>
 </head>
@@ -22,7 +22,7 @@
         <div class="ui grid">
             <div class="ui sixteen column">
                 <div class="viewport desktop">
-                    <div id="background-container">
+                    <div id="background-container" style="background: url(https://images.unsplash.com/photo-1516655855035-d5215bcb5604?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80) 0% 0% no-repeat transparent;">
                     </div>
                   </div>                  
                   <div id="positioner-container">                  
@@ -33,40 +33,64 @@
                     </div>                    
                     <div class="controls">
                       <span class="results">Position: 0% 0%</span>
-                      <span id="desktop" class="control active"><i class="icon-desktop"></i></span>
-                      <span id="tablet" class="control"><i class="icon-tablet"></i></span>
-                      <span id="mobile" class="control"><i class="icon-mobile-phone"></i></span>  
+                      <span id="desktop" class="control active"><i class="fa-solid fa-desktop"></i></span>
+                      <span id="tablet" class="control"><i class="fa-solid fa-tablet-screen-button"></i></span>
+                      <span id="mobile" class="control"><i class="fa-solid fa-mobile-screen-button"></i></span>  
                     </div>
                   </div>
             </div>
         </div>
     </div>
 
-    <script>
-        
-  
+    <script>      
         $(document).on('ready', Focal.init());
 
         $(document).ready(function () {
+            function processData(response) {
+                console.log(response)
+                    const imageURL = response.data.item.elements.image.value[0].imageUrl;
+                    document.body.style.backgroundImage = "url("+imageURL+")";
+                    
+                const height = Math.ceil($("result").height());
+                CustomElement.setHeight(height);
+                }
+
             CustomElement.init((element, _context) => {
                 config = element.config || {};
-                fieldNumber1 = config.fieldname1;
-                fieldNumber2 = config.fieldname2;
+                elementName = config.fieldname;
+                previewApiKey = config.previewApiKey;
 
-                CustomElement.setHeight(150);
-                CustomElement.getElementValue(fieldNumber1, (value) => {
+                const Kk = window['kontentDelivery'];
+                const deliveryClient = new Kk.DeliveryClient({
+                    projectId: _context.projectId,
+                    previewApiKey: previewApiKey,
+                    defaultQueryConfig: {
+                        usePreviewMode: true, // Queries the Delivery Preview API.
+                        waitForLoadingNewContent: true
+                    }
                 });
-                CustomElement.getElementValue(fieldNumber2, (value) => {
-                });
-                CustomElement.observeElementChanges([fieldNumber1], (changedElementCodenames) => {
-                    CustomElement.getElementValue(fieldNumber1, (value) => {
+                // Retrieves the landing page from your project
+                deliveryClient
+                    .item(_context.item.codename)
+                    .languageParameter(_context.variant.codename)
+                    .elementsParameter([elementName])
+                    .toPromise()
+                    .then(response => {
+                        processData(response)
                     });
+
+                CustomElement.observeElementChanges([elementName], (changedElementCodenames) => {
+                    deliveryClient
+                        .item(_context.item.codename)
+                        .languageParameter(_context.variant.codename)
+                        .elementsParameter([elementName])
+                        .toPromise()
+                        .then(response => {
+                            processData(response)
+                        });
+
                 });
-                CustomElement.observeElementChanges([fieldNumber2], (changedElementCodenames) => {
-                    CustomElement.getElementValue(fieldNumber2, (value) => {
-                    });
-                });
-            });            
+            });
         });
     </script>
 </body>

@@ -9,16 +9,13 @@ body {
   color: #424242;
 }
 
-// Container for background image
 #background-container {
   height: 100%;
   width: 100%;
-  background: url(https://images.unsplash.com/photo-1516655855035-d5215bcb5604?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80) 0% 0% no-repeat transparent;
   background-size:cover;
   will-change: background-position;
 }
 
-// Container for picker
 #positioner-container {
   position: absolute;
   bottom: 3em;
@@ -32,18 +29,18 @@ body {
   padding: 0 0.5em 0.25em;
   box-sizing: border-box;
 }
-// Title
+
 .picker-title {
   text-align: left;
   margin: 12px 0;
   font-size: 14px;
   font-weight: bold;
 }
-// Wrapper for image and point
+
 #picker {
   position: relative;
 }
-// Blue point
+
 #point {
   background-color: cyan;
   width: 1.5em;
@@ -54,11 +51,12 @@ body {
   position: absolute;
   border-radius: 50%;
   cursor: move;
-  &:before {
+}
+
+#point::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-  }
 }
 
 
@@ -72,19 +70,21 @@ body {
   transform: translate3d(-50%,-50%,0);
   will-change: width, height;
   box-shadow: 0 2px 5px rgba(0,0,0,.26);
-  &.mobile {
+}
+
+.viewport.mobile {
     width: 320px;
     height: 480px;
   }
-  &.tablet {
+
+.viewport.tablet {
     width: 568px;
     height: 824px;
-  
-  }
-  &.desktop {
+}
+
+.viewport.desktop {
     width: 75vw;
     height: 75vh;
-  }
 }
 
 .controls {
@@ -106,7 +106,8 @@ body {
   cursor: pointer;
   color: #000;
   opacity: 0.38;
-  &.active {
+}
+
+.control .active {
     opacity: 0.60;
-  }
 }

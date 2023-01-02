@@ -2,8 +2,6 @@
   Small plugin to set the focal point of a background image
 **/
 var Focal = {
-  
-
     /**
       Set variables
     **/
@@ -51,6 +49,8 @@ var Focal = {
       
       Focal.background.css('background-position', Focal.x + "% " + Focal.y + "%");
       Focal.updateResults();
+      console.log("?fit=crop&crop=focalpoint&fp-x=" + Focal.x/100 + "&fp-y=" + Focal.y/100 + "")
+      CustomElement.setValue("set value");
     },
   
     
@@ -63,6 +63,7 @@ var Focal = {
   
       Focal.background.css('background-position', Focal.x + "% " + Focal.y + "%");
       Focal.updateResults();
+      CustomElement.setValue("set value");
     },
     
     
