@@ -95,6 +95,19 @@
                     .then(response => {
                         processData(response)
                     });
+
+                    CustomElement.observeElementChanges(["image"], (changedElementCodenames) => {
+                        console.log(changedElementCodenames)
+                    deliveryClient
+                        .item(_context.item.codename)
+                        .languageParameter(_context.variant.codename)
+                        .elementsParameter(["content"])
+                        .toPromise()
+                        .then(response => {
+                            processData(response)
+                        });
+
+                });
             });
         });
     </script>
