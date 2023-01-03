@@ -60,6 +60,18 @@
                 CustomElement.setHeight(1000);
             }
 
+            CustomElement.observeItemChanges((ItemChangedDetails) => {
+            console.log(ItemChangedDetails)
+            deliveryClient
+                .item(ItemChangedDetails.item.codename)
+                .languageParameter(ItemChangedDetails.variant.codename)
+                .elementsParameter([elementName])
+                .toPromise()
+                .then(response => {
+                    processData(response)
+                });
+            });
+
             CustomElement.init((element, _context) => {
                 config = element.config || {};
                 elementName = config.fieldname;
@@ -83,18 +95,6 @@
                     .then(response => {
                         processData(response)
                     });
-
-                CustomElement.observeItemChanges((callback) => {
-                    console.log("test")
-                    deliveryClient
-                    .item(_context.item.codename)
-                    .languageParameter(_context.variant.codename)
-                    .elementsParameter([elementName])
-                    .toPromise()
-                    .then(response => {
-                        processData(response)
-                    });
-                });
             });
         });
     </script>
