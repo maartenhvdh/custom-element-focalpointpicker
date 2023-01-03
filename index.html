@@ -53,7 +53,6 @@
 
         $(document).ready(function () {
             function processData(response) {
-                console.log(response)
                 const imageURL = response.data.item.elements.image.value[0].url;
                 document.getElementById("background-container").style.backgroundImage = "url(" + imageURL + "?h=1000&q=80)";
                 document.getElementById("focal-img").src = imageURL + "?auto=format&fit=crop&h=1000&q=80";
@@ -62,7 +61,6 @@
             }
 
             CustomElement.observeItemChanges((ItemChangedDetails) => {
-            console.log(ItemChangedDetails)
             deliveryClient
                 .item(ItemChangedDetails.item.codename)
                 .languageParameter(ItemChangedDetails.variant.codename)
@@ -98,11 +96,7 @@
                     });
 
                     CustomElement.observeElementChanges(["image"], (changedElementCodenames) => {
-                        console.log(changedElementCodenames)
-                        console.log(_context)
                         setTimeout(function() {
-                        console.log(changedElementCodenames)
-                        console.log(_context)
                     deliveryClient
                         .item(_context.item.codename)
                         .languageParameter(_context.variant.codename)
@@ -111,7 +105,7 @@
                         .then(response => {
                             processData(response)
                         });
-                    }, 5000);
+                    }, 3000);
 
                 });
             });
