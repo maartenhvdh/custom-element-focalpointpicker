@@ -85,6 +85,7 @@
                     });
 
                 CustomElement.observeItemChanges((callback) => {
+                    console.log("test")
                     deliveryClient
                     .item(_context.item.codename)
                     .languageParameter(_context.variant.codename)
