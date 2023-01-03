@@ -53,6 +53,7 @@
 
         $(document).ready(function () {
             function processData(response) {
+                console.log(response)
                 const imageURL = response.data.item.elements.image.value[0].url;
                 document.getElementById("background-container").style.backgroundImage = "url(" + imageURL + "?h=1000&q=80)";
                 document.getElementById("focal-img").src = imageURL + "?auto=format&fit=crop&h=1000&q=80";
@@ -98,6 +99,7 @@
 
                     CustomElement.observeElementChanges(["image"], (changedElementCodenames) => {
                         console.log(changedElementCodenames)
+                        console.log(_context)
                     deliveryClient
                         .item(_context.item.codename)
                         .languageParameter(_context.variant.codename)
