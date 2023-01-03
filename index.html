@@ -100,6 +100,9 @@
                     CustomElement.observeElementChanges(["image"], (changedElementCodenames) => {
                         console.log(changedElementCodenames)
                         console.log(_context)
+                        setTimeout(function() {
+                        console.log(changedElementCodenames)
+                        console.log(_context)
                     deliveryClient
                         .item(_context.item.codename)
                         .languageParameter(_context.variant.codename)
@@ -108,6 +111,7 @@
                         .then(response => {
                             processData(response)
                         });
+                    }, 5000);
 
                 });
             });
