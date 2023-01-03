@@ -103,7 +103,7 @@
                     deliveryClient
                         .item(_context.item.codename)
                         .languageParameter(_context.variant.codename)
-                        .elementsParameter(["content"])
+                        .elementsParameter(["image"])
                         .toPromise()
                         .then(response => {
                             processData(response)
