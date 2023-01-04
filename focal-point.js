@@ -46,10 +46,6 @@ var Focal = {
       top: pointYOffset,
       left: pointXOffset,
     });
-    console.log(pointYOffset)
-    console.log(obj.fpY / 100)
-
-    console.log(pointXOffset)
 
     Focal.x = obj.fpX * 100;
     Focal.y = obj.fpY * 100;
@@ -68,6 +64,7 @@ var Focal = {
       left: pointXOffset,
     });
     console.log(e.pageY )
+    console.log(e.offsetY )
     console.log(pointYOffset)
     Focal.x = Math.round((e.pageY - $(this).offset().top) / Focal.picker.height() * 100);
     Focal.y = Math.round((e.pageX - $(this).offset().left) / Focal.picker.width() * 100);
