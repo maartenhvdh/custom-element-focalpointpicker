@@ -47,8 +47,8 @@ var Focal = {
       left: pointXOffset,
     });
 
-    Focal.x = obj.fpX;
-    Focal.y = obj.fpY;
+    Focal.x = obj.fpX * 100;
+    Focal.y = obj.fpY * 100;
 
     Focal.background.css('background-position', Focal.x + "% " + Focal.y + "%");
     Focal.updateResults();
@@ -63,7 +63,7 @@ var Focal = {
       top: pointYOffset,
       left: pointXOffset,
     });
-    Response.log(e.pageY )
+    console.log(e.pageY )
     Focal.x = Math.round((e.pageY - $(this).offset().top) / Focal.picker.height() * 100);
     Focal.y = Math.round((e.pageX - $(this).offset().left) / Focal.picker.width() * 100);
 
