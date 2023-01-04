@@ -37,8 +37,6 @@
                     </div>
                     <div class="controls">
                         <span class="results">Position: 0% 0%</br>
-                            Zoom <input id="zoom" type='text' size="2" value="100">%</span>
-
                         <span id="desktop" class="control active"><i class="fa-solid fa-desktop"></i></span>
                         <span id="tablet" class="control"><i class="fa-solid fa-tablet-screen-button"></i></span>
                         <span id="mobile" class="control"><i class="fa-solid fa-mobile-screen-button"></i></span>
@@ -54,21 +52,21 @@
         $(document).ready(function () {
             function processData(response) {
                 const imageURL = response.data.item.elements.image.value[0].url;
-                document.getElementById("background-container").style.backgroundImage = "url(" + imageURL + "?h=1000&q=80)";
-                document.getElementById("focal-img").src = imageURL + "?auto=format&fit=crop&h=1000&q=80";
+                document.getElementById("background-container").style.backgroundImage = "url(" + imageURL + "?h=900&q=80)";
+                document.getElementById("focal-img").src = imageURL + "?auto=format&fit=crop&h=900&q=80";
                 const height = Math.ceil($(".ui.container").height());
                 CustomElement.setHeight(1000);
             }
 
             CustomElement.observeItemChanges((ItemChangedDetails) => {
-            deliveryClient
-                .item(ItemChangedDetails.item.codename)
-                .languageParameter(ItemChangedDetails.variant.codename)
-                .elementsParameter([elementName])
-                .toPromise()
-                .then(response => {
-                    processData(response)
-                });
+                deliveryClient
+                    .item(ItemChangedDetails.item.codename)
+                    .languageParameter(ItemChangedDetails.variant.codename)
+                    .elementsParameter([elementName])
+                    .toPromise()
+                    .then(response => {
+                        processData(response)
+                    });
             });
 
             CustomElement.init((element, _context) => {
@@ -95,18 +93,17 @@
                         processData(response)
                     });
 
-                    CustomElement.observeElementChanges(["image"], (changedElementCodenames) => {
-                        setTimeout(function() {
-                    deliveryClient
-                        .item(_context.item.codename)
-                        .languageParameter(_context.variant.codename)
-                        .elementsParameter(["image"])
-                        .toPromise()
-                        .then(response => {
-                            processData(response)
-                        });
+                CustomElement.observeElementChanges(["image"], (changedElementCodenames) => {
+                    setTimeout(function () {
+                        deliveryClient
+                            .item(_context.item.codename)
+                            .languageParameter(_context.variant.codename)
+                            .elementsParameter(["image"])
+                            .toPromise()
+                            .then(response => {
+                                processData(response)
+                            });
                     }, 3000);
-
                 });
             });
         });
