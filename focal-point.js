@@ -12,9 +12,18 @@ var Focal = {
       Focal.controls = $(".control"); // control to toggle between desktop, mobile and tablet
       Focal.viewport = $('.viewport'); // viewport to switch between screen sizes
       Focal.results = $('.results');
+      try {
+        
       const obj = JSON.parse(value);
-      Focal.x = obj.fp-x + '%'; // x background position
-      Focal.y = obj.fp-y + '0%'; // y background position
+      Focal.x = obj.fp-x * 100 + '%'; // x background position
+      Focal.y = obj.fp-y * 100 + '%'; // y background position;
+      } catch (error) {
+        console.error(error);
+        Focal.x = '0%'; // x background position
+        Focal.y = '0%'; // y background position
+        // expected output: ReferenceError: nonExistentFunction is not defined
+        // (Note: the exact output may be browser-dependent)
+      }
       Focal.setEventListeners();
     },
   
