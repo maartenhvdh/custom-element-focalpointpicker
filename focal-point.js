@@ -5,15 +5,16 @@ var Focal = {
     /**
       Set variables
     **/
-    init: function() {
+    init: function(value) {
       Focal.picker = $('#focal-img'); // image to click
       Focal.point = $('#point'); // cyan focal dot
       Focal.background = $('#background-container'); // where background element is applied
       Focal.controls = $(".control"); // control to toggle between desktop, mobile and tablet
       Focal.viewport = $('.viewport'); // viewport to switch between screen sizes
       Focal.results = $('.results');
-      Focal.x = '0%'; // x background position
-      Focal.y = '0%'; // y background position
+      const obj = JSON.parse(value);
+      Focal.x = obj.fp-x + '%'; // x background position
+      Focal.y = obj.fp-y + '0%'; // y background position
       Focal.setEventListeners();
     },
   
@@ -51,6 +52,7 @@ var Focal = {
       Focal.updateResults();
       console.log("?fit=crop&crop=focalpoint&fp-x=" + Focal.x/100 + "&fp-y=" + Focal.y/100 + "")
       CustomElement.setValue("fp-x=" + Focal.x/100 + "&fp-y=" + Focal.y/100 + "");
+      JSON.stringify({ "fp-x": Focal.x/100, "fp-y": Focal.y/100 })
     },
   
     
@@ -63,7 +65,7 @@ var Focal = {
   
       Focal.background.css('background-position', Focal.x + "% " + Focal.y + "%");
       Focal.updateResults();
-      CustomElement.setValue("fp-x=" + Focal.x/100 + "&fp-y=" + Focal.y/100 + "");
+      JSON.stringify({ "fp-x": Focal.x/100, "fp-y": Focal.y/100 })
     },
     
     

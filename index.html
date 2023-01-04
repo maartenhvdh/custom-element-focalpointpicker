@@ -47,8 +47,6 @@
     </div>
 
     <script>
-        $(document).on('ready', Focal.init());
-
         $(document).ready(function () {
             function processData(response) {
                 const imageURL = response.data.item.elements.image.value[0].url;
@@ -70,6 +68,7 @@
             });
 
             CustomElement.init((element, _context) => {
+                Focal.init(element.value)
                 config = element.config || {};
                 elementName = config.fieldname;
                 previewApiKey = config.previewApiKey;
