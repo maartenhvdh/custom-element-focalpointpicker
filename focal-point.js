@@ -15,8 +15,8 @@ var Focal = {
       try {
         
       const obj = JSON.parse(value);
-      Focal.x = obj.fp-x * 100 + '%'; // x background position
-      Focal.y = obj.fp-y * 100 + '%'; // y background position;
+      Focal.x = obj.fpX * 100 + '%'; // x background position
+      Focal.y = obj.fpY * 100 + '%'; // y background position;
       } catch (error) {
         console.error(error);
         Focal.x = '0%'; // x background position
@@ -59,7 +59,7 @@ var Focal = {
       
       Focal.background.css('background-position', Focal.x + "% " + Focal.y + "%");
       Focal.updateResults();
-      CustomElement.setValue(JSON.stringify({ "fp-x": Focal.x/100, "fp-y": Focal.y/100 }));
+      CustomElement.setValue(JSON.stringify({ fpX: Focal.x/100, fpY: Focal.y/100 }));
       
     },
   
@@ -73,7 +73,7 @@ var Focal = {
   
       Focal.background.css('background-position', Focal.x + "% " + Focal.y + "%");
       Focal.updateResults();
-      CustomElement.setValue(JSON.stringify({ "fp-x": Focal.x/100, "fp-y": Focal.y/100 }));
+      CustomElement.setValue(JSON.stringify({ fpX: Focal.x/100, fpY: Focal.y/100 }));
     },
     
     
