@@ -17,7 +17,7 @@ var Focal = {
       const obj = JSON.parse(value);
       Focal.x = obj.fpX * 100 + '%'; // x background position
       Focal.y = obj.fpY * 100 + '%'; // y background position;
-      console.log(obj.fpX)
+      console.log(obj.fpX * 100 + '%'
       } catch (error) {
         console.error(error);
         Focal.x = '0%'; // x background position
@@ -25,6 +25,7 @@ var Focal = {
         // expected output: ReferenceError: nonExistentFunction is not defined
         // (Note: the exact output may be browser-dependent)
       }
+      console.log(Focal)
       Focal.setEventListeners();
     },
   
