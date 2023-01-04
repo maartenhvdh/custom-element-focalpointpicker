@@ -40,12 +40,13 @@ var Focal = {
   },
 
   setCustomFocalPoint: function (obj) {
-    var pointYOffset = obj.fpY - Focal.point.height() / 2,
-      pointXOffset = obj.fpX - Focal.point.width() / 2;
+    var pointYOffset = (obj.fpY  + $(this).offset().top) * Focal.picker.height() / 100,
+      pointXOffset = (obj.fpX  + $(this).offset().left) * Focal.picker.width() / 100;
     Focal.point.css({
       top: pointYOffset,
       left: pointXOffset,
     });
+    console.log(pointYOffset)
 
     Focal.x = obj.fpX * 100;
     Focal.y = obj.fpY * 100;
@@ -64,6 +65,7 @@ var Focal = {
       left: pointXOffset,
     });
     console.log(e.pageY )
+    console.log(pointYOffset)
     Focal.x = Math.round((e.pageY - $(this).offset().top) / Focal.picker.height() * 100);
     Focal.y = Math.round((e.pageX - $(this).offset().left) / Focal.picker.width() * 100);
 
