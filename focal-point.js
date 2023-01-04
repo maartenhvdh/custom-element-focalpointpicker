@@ -13,10 +13,11 @@ var Focal = {
       Focal.viewport = $('.viewport'); // viewport to switch between screen sizes
       Focal.results = $('.results');
       try {
-        
+        console.log(value)
       const obj = JSON.parse(value);
       Focal.x = obj.fpX * 100 + '%'; // x background position
       Focal.y = obj.fpY * 100 + '%'; // y background position;
+      console.log(obj.fpX)
       } catch (error) {
         console.error(error);
         Focal.x = '0%'; // x background position
