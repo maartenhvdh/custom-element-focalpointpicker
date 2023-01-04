@@ -59,9 +59,8 @@ var Focal = {
       
       Focal.background.css('background-position', Focal.x + "% " + Focal.y + "%");
       Focal.updateResults();
-      console.log("?fit=crop&crop=focalpoint&fp-x=" + Focal.x/100 + "&fp-y=" + Focal.y/100 + "")
-      CustomElement.setValue("fp-x=" + Focal.x/100 + "&fp-y=" + Focal.y/100 + "");
-      JSON.stringify({ "fp-x": Focal.x/100, "fp-y": Focal.y/100 })
+      CustomElement.setValue(JSON.stringify({ "fp-x": Focal.x/100, "fp-y": Focal.y/100 }));
+      
     },
   
     
@@ -74,7 +73,7 @@ var Focal = {
   
       Focal.background.css('background-position', Focal.x + "% " + Focal.y + "%");
       Focal.updateResults();
-      JSON.stringify({ "fp-x": Focal.x/100, "fp-y": Focal.y/100 })
+      CustomElement.setValue(JSON.stringify({ "fp-x": Focal.x/100, "fp-y": Focal.y/100 }));
     },
     
     
