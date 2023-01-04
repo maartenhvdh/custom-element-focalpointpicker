@@ -16,7 +16,7 @@ var Focal = {
       const obj = JSON.parse(value);
       Focal.x = obj.fpX * 100 + '%'; // x background position
       Focal.y = obj.fpY * 100 + '%'; // y background position;
-      this.setFocalPoint;
+      this.setCustomFocalPoint(obj);
     } catch (error) {
       console.error(error);
       Focal.x = '0%'; // x background position
@@ -39,7 +39,20 @@ var Focal = {
     Focal.controls.on('click', this.changeViewport);
   },
 
+  setCustomFocalPoint: function (obj) {
+    var pointYOffset = obj.fpY - Focal.point.height() / 2,
+      pointXOffset = obj.fpX - Focal.point.width() / 2;
+    Focal.point.css({
+      top: pointYOffset,
+      left: pointXOffset,
+    });
 
+    Focal.x = obj.fpX;
+    Focal.y = obj.fpY;
+
+    Focal.background.css('background-position', Focal.x + "% " + Focal.y + "%");
+    Focal.updateResults();
+  },
   /**
     Move the focal point 
   **/
@@ -50,7 +63,7 @@ var Focal = {
       top: pointYOffset,
       left: pointXOffset,
     });
-
+    Response.log(e.pageY )
     Focal.x = Math.round((e.pageY - $(this).offset().top) / Focal.picker.height() * 100);
     Focal.y = Math.round((e.pageX - $(this).offset().left) / Focal.picker.width() * 100);
 
