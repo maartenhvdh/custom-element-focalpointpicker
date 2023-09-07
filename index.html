@@ -78,8 +78,10 @@
                 console.log(_context)
 
                 const Kk = window['kontentDelivery'];
+
+                // Tip: Change the project ID of the API call to yours to display your own content. Make sure the codenames still match.
                 const deliveryClient = new Kk.DeliveryClient({
-                    projectId: _context.projectId,
+                    environmentId: _context.projectId,
                     previewApiKey: previewApiKey,
                     defaultQueryConfig: {
                         usePreviewMode: true, // Queries the Delivery Preview API.
