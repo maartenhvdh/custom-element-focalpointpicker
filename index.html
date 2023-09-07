@@ -49,6 +49,7 @@
     <script>
         $(document).ready(function () {
             function processData(response) {
+                CustomElement.setHeight(1000);
                 const imageURL = response.data.item.elements.image.value[0].url;
                 document.getElementById("background-container").style.backgroundImage = "url(" + imageURL + "?h=900&q=80)";
                 document.getElementById("focal-img").src = imageURL + "?auto=format&fit=crop&h=900&q=80";
@@ -72,6 +73,9 @@
                 config = element.config || {};
                 elementName = config.fieldname;
                 previewApiKey = config.previewApiKey;
+
+                console.log("_context")
+                console.log(_context)
 
                 const Kk = window['kontentDelivery'];
                 const deliveryClient = new Kk.DeliveryClient({
